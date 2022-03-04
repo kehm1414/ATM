@@ -13,6 +13,7 @@ import java.util.List;
 
 @Getter
 public class BaseClientTransactionsCollection implements ITransactionsCollection {
+    private ATM atm;
     List<String> transactionOptions = new ArrayList<>(Arrays.asList(
             "CheckBalance",
             "Deposit Cash",
@@ -21,7 +22,6 @@ public class BaseClientTransactionsCollection implements ITransactionsCollection
             "Change Pin",
             "Logout"
     ));
-    private ATM atm;
 
     public BaseClientTransactionsCollection(ATM atm) {
         this.atm = atm;
