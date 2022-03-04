@@ -1,0 +1,5 @@
+interface ITransactionsCollection {
+
+    ITransaction chooseTransaction();
+
+}
