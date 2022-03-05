@@ -10,7 +10,6 @@ import java.util.List;
 *  Las clases que extienden a esta clase base deberán hacer overwrite de:
 *  la lista "transactionOptions" y del método "chooseTransaction"*/
 
-
 @Getter
 public class BaseClientTransactionsCollection implements ITransactionsCollection {
     private ATM atm;

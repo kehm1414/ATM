@@ -6,7 +6,7 @@ public class Keyboard {
     Scanner scanner = new Scanner(System.in);
 
     public int getChoice(int amountOfOptions){
-        int choice = 0;
+        int choice;
         try{
             choice = Integer.parseInt(scanner.nextLine());
             if(choice<1 || choice>amountOfOptions){
@@ -16,8 +16,21 @@ public class Keyboard {
             System.out.println("Invalid Option. Please enter a valid option:");
             return getChoice(amountOfOptions);
         }
-
         return choice;
+    }
+
+    public double getAmount(){
+        double amount;
+        try{
+            amount = Double.parseDouble(scanner.nextLine());
+            if(amount<1){
+                throw new Exception();
+            }
+        } catch (Exception e){
+            System.out.println("Invalid input. Please enter a valid amount:");
+            return getAmount();
+        }
+        return amount;
     }
 
     public String getAccountNumberInput(){

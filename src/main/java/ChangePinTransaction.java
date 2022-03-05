@@ -7,6 +7,7 @@ public class ChangePinTransaction implements ITransaction{
 
     @Override
     public boolean process() {
+        atm.getSession().getActiveAccount().getPin();
         return false;
     }
 }

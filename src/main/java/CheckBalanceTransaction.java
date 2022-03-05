@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class CheckBalanceTransaction implements ITransaction{
     private ATM atm;
 
@@ -7,7 +9,20 @@ public class CheckBalanceTransaction implements ITransaction{
 
     @Override
     public boolean process() {
-        atm.getDisplay().showBalance(atm.getSession().getActiveAccount().getBalance());
+        double balance = atm.getSession().getActiveAccount().getBalance();
+        atm.getDisplay().showBalance(balance);
+
+        // Emit receipt
+        ReceiptEmitter receipt = new CheckBalanceReceiptEmitter(
+                atm.getBank().getName(),
+                atm.getSession().getActiveAccount().getOwnerName(),
+                LocalDate.now().toString(),
+                "Check Balance",
+                atm.getSession().getActiveAccount().getAccountNumber(),
+                String.valueOf(balance),
+                String.valueOf((int) Math.ceil(Math.random()*1000000))
+        );
+        receipt.toPDF("d:/receipt.pdf");
         return true;
     }
 }

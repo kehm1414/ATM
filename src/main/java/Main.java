@@ -21,7 +21,7 @@ public class Main {
         );
 
         // Inicializamos nuestro cajero
-        ATM atm = new ATM("1", bank, "8888",15000);
+        ATM atm = new ATM("1", bank, "8888",1000000);
         atm.start();
 
     }

@@ -1,23 +1,45 @@
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
+import lombok.Getter;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-public class PDFDemo {
-    public static void main(String[] args) {
+@Getter
+public abstract class ReceiptEmitter {
+    private String bankName;
+    private String clientName;
+    private String date;
+    private String transactionName;
+    private String accountNumber;
+    private String amount;
+    private String reference;
 
+    public ReceiptEmitter(String bankName, String clientName, String date, String transactionName, String accountNumber, String amount, String reference) {
+        this.bankName = bankName;
+        this.clientName = clientName;
+        this.date = date;
+        this.transactionName = transactionName;
+        this.accountNumber = accountNumber;
+        this.amount = amount;
+        this.reference = reference;
+    }
+
+    public void toPDF(String location){
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("d:/receipt.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(location));
             document.open();
 
             // Header
             Font myHeaderFont = new Font();
             myHeaderFont.setSize(20F);
             myHeaderFont.setStyle("bold");
-            Paragraph header = new Paragraph("Universal Bank", myHeaderFont);
+            Paragraph header = new Paragraph(bankName + "'s Bank", myHeaderFont);
             header.setAlignment(1);
             document.add(header);
             document.add(new Paragraph("  "));
@@ -27,10 +49,9 @@ public class PDFDemo {
             Font generalDataFont = new Font();
             generalDataFont.setSize(15F);
             Paragraph generalData = new Paragraph(
-                    """
-                            Name: Kevin Hernández
-                            Date: 05/03/22
-                            Transaction: Deposit""",
+                        "Name: " + clientName + "\n"
+                            + "Date: " + date + "\n"
+                            + "Transaction: " + transactionName,
                     generalDataFont);
             document.add(generalData);
             document.add(new Paragraph("  "));
@@ -51,25 +72,14 @@ public class PDFDemo {
             successMessageFont.setSize(12F);
             Paragraph successMessage = new Paragraph(
                     "Your operation has been successfully completed."
-            ,successMessageFont);
+                    ,successMessageFont);
             successMessage.setAlignment(1);
             successMessage.setSpacingAfter(15);
             document.add(successMessage);
 
             // Transaction Details
-            Font transactionDetailsFont = new Font();
-            transactionDetailsFont.setSize(10F);
-            Paragraph transactionDetails = new Paragraph(
-                    """
-                            Target account: 00110011001100110011
-                            Amount: $10,00
-                            Reference Number: 123456789
-                            """
-                    , transactionDetailsFont);
-            transactionDetails.setIndentationLeft(170);
-            transactionDetails.setSpacingAfter(30);
-            //transactionDetails.setIndentationRight(150);
-            document.add(transactionDetails);
+
+            document.add(getTransactionDetails());
 
             // Farewell Message
             Font farewellMessageFont = new Font();
@@ -85,7 +95,8 @@ public class PDFDemo {
         } catch (DocumentException | FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
     }
+
+    public abstract Paragraph getTransactionDetails();
+
 }

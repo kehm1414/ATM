@@ -1,4 +1,5 @@
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class Account implements IATMTransactional {
@@ -6,6 +7,7 @@ public class Account implements IATMTransactional {
     private final String accountNumber;
     private String pin;
     private String type;
+    @Setter
     private double balance;
 
     public Account(String ownerName, String accountNumber, String pin, String type, double balance) {
