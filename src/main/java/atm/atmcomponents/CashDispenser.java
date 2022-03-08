@@ -11,4 +11,12 @@ public class CashDispenser {
   public CashDispenser(double initialBalance) {
     this.balance = initialBalance;
   }
+
+  public void increaseBalance(double amount){
+    balance+=amount;
+  }
+
+  public void decreaseBalance(double amount){
+    balance-=amount;
+  }
 }

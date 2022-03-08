@@ -72,7 +72,7 @@ public class Display {
 
   public void notEnoughATMBalance() {
     System.out.println(
-        "We're sorry, at the moment the ATM.ATM doesn't have enough cash to process your transaction");
+        "We're sorry, at the moment the ATM doesn't have enough cash to process your transaction");
     System.out.println("Please, try another time or withdraw a smaller amount");
   }
 

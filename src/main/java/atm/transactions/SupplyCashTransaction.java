@@ -24,7 +24,7 @@ public class SupplyCashTransaction implements ITransaction {
     int choice = atm.getKeyboard().getChoice(2);
 
     if (choice == 1) {
-      cashDispenser.setBalance(cashDispenser.getBalance() + amount);
+      cashDispenser.increaseBalance(amount);
       atm.getDisplay().successfulTransaction();
       return true;
     } else {

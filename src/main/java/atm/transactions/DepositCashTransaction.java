@@ -33,7 +33,7 @@ public class DepositCashTransaction implements ITransaction {
 
     if (choice == 1) {
       //Metodo para el deposito en cajero y cuenta del usuario
-      cashDispenser.setBalance(cashDispenser.getBalance() + amount);
+      cashDispenser.increaseBalance(amount);
       account.setBalance(account.getBalance() + amount);
       atm.getDisplay().successfulTransaction();
 

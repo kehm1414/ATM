@@ -32,7 +32,7 @@ public class WithdrawCashTransaction implements ITransaction {
     } else if (amount > account.getBalance()) {
       atm.getDisplay().notEnoughAccountBalance();
     } else {
-      cashDispenser.setBalance(cashDispenser.getBalance() - amount);
+      cashDispenser.decreaseBalance(amount);
       account.setBalance(account.getBalance() - amount);
 
       // Emit receipt
