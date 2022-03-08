@@ -29,22 +29,12 @@ public class AdminTransactionsCollection implements ITransactionsCollection {
     @Override
     public ITransaction chooseTransaction() {
         atm.getDisplay().showOptions("Transactions available: ", transactionOptions);
-        switch (atm.getKeyboard().getChoice(transactionOptions.size())){
-            case 1 -> {
-                return new CheckATMBalanceTransaction(atm);
-            }
-            case 2 -> {
-                return new SupplyCashTransaction(atm);
-            }
-            case 3 -> {
-                return new ChangeAdminPinTransaction(atm);
-            }
-            case 4 -> {
-                return new ExitTransaction(atm);
-            }
-            default -> {
-                return null;
-            }
-        }
+        return switch (atm.getKeyboard().getChoice(transactionOptions.size())){
+            case 1 -> new CheckATMBalanceTransaction(atm);
+            case 2 -> new SupplyCashTransaction(atm);
+            case 3 -> new ChangeAdminPinTransaction(atm);
+            case 4 -> new ExitTransaction(atm);
+            default -> null;
+        };
     }
 }

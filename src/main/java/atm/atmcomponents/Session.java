@@ -2,26 +2,25 @@ package atm.atmcomponents;
 
 import atm.ATM;
 import atm.accounttypes.Account;
-import atm.Bank;
-import atm.transactionscollection.ITransactionsCollection;
 import atm.transactionscollection.AdminTransactionsCollection;
+import atm.transactionscollection.ITransactionsCollection;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 
 /* ATM.Session se encarga de manejar el inicio de sesión, lo que sucede durante, y la salida de sesión.*/
 
 @Getter
+@Setter
 public class Session {
   private Account activeAccount;
-  private Bank bank;
   private ATM atm;
   private boolean isConnected;
 
-  public Session(Bank bank, ATM atm) {
+  public Session() {
     this.activeAccount = null;
-    this.bank = bank;
-    this.atm = atm;
+    this.atm = null;
     this.isConnected = false;
   }
 
@@ -31,7 +30,7 @@ public class Session {
   // se lo pasamos al método sobrecargado login para que realice la conexión
   public void login() {
     atm.getDisplay().askAccountNumber();
-    String accountNumber = atm.getKeyboard().getAccountNumberInput();
+    String accountNumber = atm.getKeyboard().getAccountNumber();
     atm.getDisplay().askPinNumber();
     String pinNumber = atm.getKeyboard().getPin();
     login(accountNumber, pinNumber);
@@ -39,7 +38,7 @@ public class Session {
 
   // Cuando login se llama con numero de cuenta y pin, procede a intentar hacer la conexión.
   public void login(String accountNumber, String pin) {
-    for (Account account : this.bank.getAccounts()) {
+    for (Account account : atm.getBank().getAccounts()) {
       if (account.getAccountNumber().equals(accountNumber) && account.getPin().equals(pin)) {
         this.activeAccount = account;
         this.isConnected = true;

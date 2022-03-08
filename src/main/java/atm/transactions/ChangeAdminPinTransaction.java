@@ -45,11 +45,6 @@ public class ChangeAdminPinTransaction implements ITransaction {
         // almacenamos el pin nuevo ingresado
         String newPin = atm.getKeyboard().getPin();
 
-        while(!validPin(newPin)){
-            atm.getDisplay().tryAgainNewPin();
-            newPin = atm.getKeyboard().getPin();
-        }
-
         // asignamos pin por medio de setPin
         atm.setAdminPin(newPin);
         atm.getDisplay().okChangePin();
@@ -57,18 +52,5 @@ public class ChangeAdminPinTransaction implements ITransaction {
         System.out.println("su nuevo pin es: " + atm.getAdminPin());
 
         return true;
-    }
-
-    public boolean validPin(String pin) {
-        if (pin.length() == 4) {
-            for (int i = 0; i < pin.length(); i++) {
-                char caracter = pin.toUpperCase().charAt(i);
-                if ( caracter < 48 || caracter > 57){ // 48 a 57 son los carácteres numéricos 0-9
-                    return false; // Se ha encontrado un caracter que no es numerico
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

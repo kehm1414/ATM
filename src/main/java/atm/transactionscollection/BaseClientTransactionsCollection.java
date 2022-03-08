@@ -33,28 +33,14 @@ public class BaseClientTransactionsCollection implements ITransactionsCollection
     @Override
     public ITransaction chooseTransaction() {
         atm.getDisplay().showOptions("Transactions available: ", transactionOptions);
-        switch (atm.getKeyboard().getChoice(transactionOptions.size())){
-            case 1 -> {
-                return new CheckBalanceTransaction(atm);
-            }
-            case 2 -> {
-                return new DepositCashTransaction(atm);
-            }
-            case 3 -> {
-                return new WithdrawCashTransaction(atm);
-            }
-            case 4 -> {
-                return new TransferFundsTransaction(atm);
-            }
-            case 5 -> {
-                return new ChangePinTransaction(atm);
-            }
-            case 6 -> {
-                return new ExitTransaction(atm);
-            }
-            default -> {
-                return null;
-            }
-        }
+        return switch (atm.getKeyboard().getChoice(transactionOptions.size())){
+            case 1 -> new CheckBalanceTransaction(atm);
+            case 2 -> new DepositCashTransaction(atm);
+            case 3 -> new WithdrawCashTransaction(atm);
+            case 4 -> new TransferFundsTransaction(atm);
+            case 5 -> new ChangePinTransaction(atm);
+            case 6 -> new ExitTransaction(atm);
+            default -> null;
+        };
     }
 }

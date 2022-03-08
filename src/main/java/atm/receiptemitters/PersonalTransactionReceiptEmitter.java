@@ -21,7 +21,7 @@ public class PersonalTransactionReceiptEmitter extends ReceiptEmitter {
     transactionDetailsFont.setSize(10F);
     Paragraph transactionDetails =
         new Paragraph(
-            "ATM.Account: "
+            "Account: "
                 + getAccountNumber()
                 + "\n"
                 + "Transaction Amount: "

@@ -5,7 +5,16 @@ public class InputValidator {
   private InputValidator(){}
 
   public static boolean checkAccountNumber(String accountNumber) {
-    return true;
+    if(accountNumber.length() == 20){
+      for(int i = 0; i<accountNumber.length(); i++){
+        char character = accountNumber.charAt(i);
+        if(character < 48 || character > 57){
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
   }
 
   public static boolean checkPinNumber(String pinNumber) {

@@ -21,7 +21,7 @@ public class TransferFundsTransaction implements ITransaction {
     Account toAccount = null;
 
     atm.getDisplay().askAccountToDeposit();
-    String accountNumber = atm.getKeyboard().getAccountNumberInput();
+    String accountNumber = atm.getKeyboard().getAccountNumber();
 
     // Checks if account number entered coincides with database then reassign "toAccount"
     for (Account account : atm.getBank().getAccounts()) {

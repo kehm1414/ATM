@@ -21,7 +21,7 @@ public class TransferFundsReceiptEmitter extends ReceiptEmitter {
     transactionDetailsFont.setSize(10F);
     Paragraph transactionDetails =
         new Paragraph(
-            "Transferred to ATM.Account: "
+            "Transferred to Account: "
                 + getAccountNumber()
                 + "\n"
                 + "Amount Transferred: "

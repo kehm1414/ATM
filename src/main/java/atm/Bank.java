@@ -18,8 +18,7 @@ public class Bank {
     this.accounts = new HashSet<>();
   }
 
-  public boolean addAccount(Account account) {
+  public void addAccount(Account account) {
     accounts.add(account);
-    return true;
   }
 }

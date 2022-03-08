@@ -48,7 +48,7 @@ public abstract class ReceiptEmitter {
       Font myHeaderFont = new Font();
       myHeaderFont.setSize(20F);
       myHeaderFont.setStyle("bold");
-      Paragraph header = new Paragraph(bankName + "'s ATM.Bank", myHeaderFont);
+      Paragraph header = new Paragraph(bankName + "'s ATM", myHeaderFont);
       header.setAlignment(1);
       document.add(header);
       document.add(new Paragraph("  "));

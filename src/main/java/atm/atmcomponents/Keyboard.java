@@ -7,7 +7,7 @@ import java.util.Scanner;
 /* Clase que se encarga de procesar la entrada de texto */
 
 public class Keyboard {
-  Scanner scanner = new Scanner(System.in);
+  private final Scanner scanner = new Scanner(System.in);
 
   public int getChoice(int amountOfOptions) {
     int choice;
@@ -32,16 +32,16 @@ public class Keyboard {
       }
     } catch (Exception e) {
       System.out.println("Invalid input. Please enter a valid amount:");
-      return getAmount();
+      amount = getAmount();
     }
     return amount;
   }
 
-  public String getAccountNumberInput() {
+  public String getAccountNumber() {
     String accountNumber = scanner.nextLine();
     if (!InputValidator.checkAccountNumber(accountNumber)) {
       System.out.println("Invalid account number. Please enter a valid account number");
-      accountNumber = getAccountNumberInput();
+      accountNumber = getAccountNumber();
     }
     return accountNumber;
   }
@@ -50,7 +50,7 @@ public class Keyboard {
     String pinNumber = scanner.nextLine();
     if (!InputValidator.checkPinNumber(pinNumber)) {
       System.out.println("Invalid pin number. Please enter a valid pin number");
-      getPin();
+      pinNumber = getPin();
     }
     return pinNumber;
   }

@@ -30,20 +30,18 @@ public class ATM {
     private String adminPin;
 
 
-    public ATM(String id, Bank bank, String adminPin, double initialCash) {
+    public ATM(String id, Bank bank, String adminPin, Session session, Display display, Keyboard keyboard, CashDispenser cashDispenser) {
         this.id = id;
         this.bank = bank;
         this.adminPin = adminPin;
-        this.session = new Session(bank, this);
-        this.display = new Display();
-        this.keyboard = new Keyboard();
-        this.cashDispenser = new CashDispenser(initialCash);
+        this.session = session;
+        this.session.setAtm(this);
+        this.display = display;
+        this.keyboard = keyboard;
+        this.cashDispenser = cashDispenser;
     }
 
     // Inicia el cajero, muestra un mensaje de inicio y el menú inicial: Iniciar sesión, Administrar, Salir
-    // Si el usuario presiona "1", procede al inicio de sesión como cliente.
-    // Si el usuario presiona "2", procede al inicio de sesión como administrador
-    // Si el usuario presiona "3", el programa termina
     public void start(){
         display.welcomeMessage(bank.getName());
         display.showOptions("Please, insert a number corresponding to a valid option",

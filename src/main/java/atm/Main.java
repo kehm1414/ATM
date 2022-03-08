@@ -2,6 +2,10 @@ package atm;
 
 import atm.accounttypes.Account;
 import atm.accounttypes.OnlyCashAccount;
+import atm.atmcomponents.CashDispenser;
+import atm.atmcomponents.Display;
+import atm.atmcomponents.Keyboard;
+import atm.atmcomponents.Session;
 
 public class Main {
   public static void main(String[] args) {
@@ -25,8 +29,13 @@ public class Main {
             "joseperez@gmail.com",
             10000));
 
+
     // Inicializamos nuestro cajero
-    ATM atm = new ATM("1", bank, "8888", 1000000);
+    Display display = new Display();
+    Keyboard keyboard = new Keyboard();
+    CashDispenser cashDispenser = new CashDispenser(1000000);
+    Session session = new Session();
+    ATM atm = new ATM("1", bank, "8888", session, display, keyboard, cashDispenser);
     atm.start();
   }
 }

@@ -9,12 +9,9 @@ import java.util.List;
 
 /* Colección de transacciones disponibles para el tipo de cuenta OnlyCash */
 
-public class OnlyCashTransactionsCollection extends BaseClientTransactionsCollection{
-    public OnlyCashTransactionsCollection(ATM atm) {
-        super(atm);
-    }
-
-    List<String> transactionOptions = new ArrayList<>(Arrays.asList(
+public class OnlyCashTransactionsCollection implements ITransactionsCollection{
+    private ATM atm;
+    List<String> octransactionOptions = new ArrayList<>(Arrays.asList(
             "CheckBalance",
             "Deposit Cash",
             "Withdraw Cash",
@@ -22,28 +19,20 @@ public class OnlyCashTransactionsCollection extends BaseClientTransactionsCollec
             "Logout"
     ));
 
+    public OnlyCashTransactionsCollection(ATM atm) {
+        this.atm = atm;
+    }
+
     @Override
     public ITransaction chooseTransaction() {
-        getAtm().getDisplay().showOptions("Transactions available: ", transactionOptions);
-        switch (getAtm().getKeyboard().getChoice(transactionOptions.size())){
-            case 1 -> {
-                return new CheckBalanceTransaction(getAtm());
-            }
-            case 2 -> {
-                return new DepositCashTransaction(getAtm());
-            }
-            case 3 -> {
-                return new WithdrawCashTransaction(getAtm());
-            }
-            case 4 -> {
-                return new ChangePinTransaction(getAtm());
-            }
-            case 5 -> {
-                return new ExitTransaction(getAtm());
-            }
-            default -> {
-                return null;
-            }
-        }
+        atm.getDisplay().showOptions("Transactions available: ", octransactionOptions);
+        return switch (atm.getKeyboard().getChoice(octransactionOptions.size())){
+            case 1 -> new CheckBalanceTransaction(atm);
+            case 2 -> new DepositCashTransaction(atm);
+            case 3 -> new WithdrawCashTransaction(atm);
+            case 4 -> new ChangePinTransaction(atm);
+            case 5 -> new ExitTransaction(atm);
+            default -> null;
+        };
     }
 }
