@@ -8,12 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* Esta es la clase base para las TransactionsCollection
-*  En estas clases se manejarán las opciones que pueden tener cada tipo de cuenta
-*  Esta clase base tiene todas las opciones disponibles para un cliente con full acceso
-*  Las clases que extienden a esta clase base deberán hacer overwrite de:
-*  la lista "transactionOptions" y del método "chooseTransaction"*/
-
 @Getter
 public class BaseClientTransactionsCollection implements ITransactionsCollection {
     private ATM atm;

@@ -17,18 +17,15 @@ public class Main {
             "Kevin Hernandez",
             "01234567890123456789",
             "1234",
-            "Client",
-            "kvkevinhz@gmail.com",
+                "kvkevinhz@gmail.com",
             20000));
     bank.addAccount(
         new OnlyCashAccount(
             "Jose Perez",
             "00110011001100110011",
             "0011",
-            "OnlyCashClient",
-            "joseperez@gmail.com",
+                "joseperez@gmail.com",
             10000));
-
 
     // Inicializamos nuestro cajero
     Display display = new Display();

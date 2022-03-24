@@ -4,53 +4,41 @@ import atm.ATM;
 
 public class ChangeAdminPinTransaction implements ITransaction {
 
-    private ATM atm;
+  private ATM atm;
 
-    public ChangeAdminPinTransaction(ATM atm) {
-        this.atm = atm;
+  public ChangeAdminPinTransaction(ATM atm) {
+    this.atm = atm;
+  }
+
+  @Override
+  public boolean process() {
+
+    if(!checkIfUserRemembersOldPin(3)){
+      atm.getDisplay().pinForgottenLogout();
+      atm.getSession().logout();
+      return false;
     }
 
-    @Override
-    public boolean process() {
-        String adminPin = atm.getAdminPin();
+    atm.getDisplay().askNewPin();
+    process(atm.getKeyboard().getPin());
+    atm.getDisplay().successfulPinChange();
+    System.out.println("The new ATM's pin number is: " + atm.getAdminPin());
+    return true;
+  }
 
-        // Se le pide a administrador colocar el pin antiguo, tiene 3 intentos, si falla se le sacará de sesión
-        int tries = 3;
+  public void process(String newPin) {
+    atm.setAdminPin(newPin);
+  }
 
-        while(tries > 0){
-            // Pide ingresar pin
-            atm.getDisplay().askChangePin();
-
-            // almacenamos el pin ingresado
-            String oldPin = atm.getKeyboard().getPin();
-
-            // validamos que el pin = al de la session actual
-            if(oldPin.equals(adminPin)){
-                break;
-            }
-
-            tries--;
-            atm.getDisplay().pinDoesntMatch(tries);
-        }
-
-        // Si el usuario no introduce bien su antigua contraseña en los tres intentos, sacar de sesión
-        if(tries == 0) {
-            atm.getDisplay().pinForgottenLogout();
-            atm.getSession().logout();
-            return false;
-        }
-
-        // pedimos ingresar nuevo pin
-        atm.getDisplay().changePin();
-        // almacenamos el pin nuevo ingresado
-        String newPin = atm.getKeyboard().getPin();
-
-        // asignamos pin por medio de setPin
-        atm.setAdminPin(newPin);
-        atm.getDisplay().okChangePin();
-        // Imprimir mensaje de cambio de pin
-        System.out.println("su nuevo pin es: " + atm.getAdminPin());
-
-        return true;
+  public boolean checkIfUserRemembersOldPin(int tries){
+    while (tries > 0) {
+      atm.getDisplay().askPreviousPin();
+      String oldPin = atm.getKeyboard().getPin();
+      if (oldPin.equals(atm.getAdminPin())) break;
+      tries--;
+      atm.getDisplay().pinDoesntMatch(tries);
     }
+    return tries>0;
+  }
+
 }

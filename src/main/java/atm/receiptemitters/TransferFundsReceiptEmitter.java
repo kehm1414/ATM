@@ -7,12 +7,10 @@ public class TransferFundsReceiptEmitter extends ReceiptEmitter {
   public TransferFundsReceiptEmitter(
       String bankName,
       String clientName,
-      String date,
       String transactionName,
       String accountNumber,
-      String amount,
-      String reference) {
-    super(bankName, clientName, date, transactionName, accountNumber, amount, reference);
+      String amount) {
+    super(bankName, clientName, transactionName, accountNumber, amount);
   }
 
   @Override

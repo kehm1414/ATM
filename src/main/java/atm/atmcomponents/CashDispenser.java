@@ -1,4 +1,5 @@
-package atm.atmcomponents; // El dispensador de dinero, acá se maneja el stock de dinero dentro del cajero.
+package atm.atmcomponents; // El dispensador de dinero, acá se maneja el stock de dinero dentro del
+                           // cajero.
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,11 +13,11 @@ public class CashDispenser {
     this.balance = initialBalance;
   }
 
-  public void increaseBalance(double amount){
-    balance+=amount;
+  public void increaseBalance(double amount) {
+    balance += amount;
   }
 
-  public void decreaseBalance(double amount){
-    balance-=amount;
+  public void decreaseBalance(double amount) {
+    if (amount < balance && amount > 0) balance -= amount;
   }
 }

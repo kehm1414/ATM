@@ -6,17 +6,13 @@ import atm.transactionscollection.OnlyCashTransactionsCollection;
 
 public class OnlyCashAccount extends Account implements IATMTransactional {
 
-  /* Cuenta de ejemplo para mostrar opciones distintas para distintos tipos de cuenta */
-  /* Cuentas de tipo OnlyCash son cuentas que solo pueden retirar y depositar en efectivo
-   * No pueden hacer transferencias */
   public OnlyCashAccount(
-      String ownerName,
-      String accountNumber,
-      String pin,
-      String type,
-      String email,
-      double balance) {
-    super(ownerName, accountNumber, pin, type, email, balance);
+          String ownerName,
+          String accountNumber,
+          String pin,
+          String email,
+          double balance) {
+    super(ownerName, accountNumber, pin, email, balance);
   }
 
   @Override

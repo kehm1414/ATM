@@ -6,8 +6,6 @@ import lombok.Getter;
 import java.util.HashSet;
 import java.util.Set;
 
-// Esta clase almacena las cuentas de banco, funcionará como nuestra base de datos.
-
 @Getter
 public class Bank {
   final String name;
@@ -20,5 +18,12 @@ public class Bank {
 
   public void addAccount(Account account) {
     accounts.add(account);
+  }
+
+  public Account searchAccount(String accountNumber){
+    for (Account account : getAccounts()) {
+      if (account.getAccountNumber().equals(accountNumber)) return account;
+    }
+    return null;
   }
 }

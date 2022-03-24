@@ -13,21 +13,22 @@ public class Keyboard {
     int choice;
     try {
       choice = Integer.parseInt(scanner.nextLine());
-      if (choice < 1 || choice > amountOfOptions) {
+      if (InputValidator.checkValidChoice(choice, amountOfOptions)) {
+        return choice;
+      } else {
         throw new Exception();
       }
     } catch (Exception e) {
       System.out.println("Invalid Option. Please enter a valid option:");
       return getChoice(amountOfOptions);
     }
-    return choice;
   }
 
   public double getAmount() {
     double amount;
     try {
       amount = Double.parseDouble(scanner.nextLine());
-      if (amount < 1) {
+      if (!InputValidator.checkValidAmount(amount)) {
         throw new Exception();
       }
     } catch (Exception e) {

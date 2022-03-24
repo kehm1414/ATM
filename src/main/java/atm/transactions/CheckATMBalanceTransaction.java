@@ -11,8 +11,7 @@ public class CheckATMBalanceTransaction implements ITransaction {
 
   @Override
   public boolean process() {
-    double balance = atm.getCashDispenser().getBalance();
-    atm.getDisplay().showATMBalance(balance);
+    atm.getDisplay().showATMBalance(atm.getCashDispenser().getBalance());
     return true;
   }
 }

@@ -9,15 +9,6 @@ import lombok.Setter;
 
 import java.util.Arrays;
 
-/* Clase ATM.ATM
-*  Se le pasa un banco como argumento para tener acceso a su "base de datos" de cuentas
-*  Está compuesto por:
-*  Un Controlador de sesiones "session" que maneja el inicio, ejecución (lo que se muestra al entrar) y salida de sesion
-*  Un display que se encargará de mostrar los mensajes en pantalla (en general son métodos simples pero algunos son
-*       repetitivos así que por eso se trasladó a otra clase para reutilizar código.
-*  Un teclado o procesador de entrada que se encarga de esperar y procesar la entrada de datos del usuario
-*  ATM.CashDispenser (hasta ahora no implementado) para manejar (entrada, salida y balance) la cantidad de dinero que hay en el cajero
-*  */
 @Getter
 public class ATM {
     private final String id;
@@ -41,7 +32,6 @@ public class ATM {
         this.cashDispenser = cashDispenser;
     }
 
-    // Inicia el cajero, muestra un mensaje de inicio y el menú inicial: Iniciar sesión, Administrar, Salir
     public void start(){
         display.welcomeMessage(bank.getName());
         display.showOptions("Please, insert a number corresponding to a valid option",
