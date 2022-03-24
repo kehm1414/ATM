@@ -4,8 +4,6 @@ import atm.InputValidator;
 
 import java.util.Scanner;
 
-/* Clase que se encarga de procesar la entrada de texto */
-
 public class Keyboard {
   private final Scanner scanner = new Scanner(System.in);
 

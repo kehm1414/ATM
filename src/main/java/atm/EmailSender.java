@@ -8,8 +8,10 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class EmailSender {
+  private static final Logger LOGGER = Logger.getLogger(EmailSender.class.getName());
 
   private EmailSender() {
     throw new IllegalStateException("Utility class");
@@ -61,6 +63,7 @@ public class EmailSender {
       msg.setContent(emailContent);
 
       Transport.send(msg);
+      LOGGER.info("A notification has been set to user's email.");
     } catch (MessagingException | IOException e) {
       e.printStackTrace();
     }

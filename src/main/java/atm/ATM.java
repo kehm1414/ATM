@@ -8,9 +8,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 @Getter
 public class ATM {
+    private static final Logger LOGGER = Logger.getLogger(ATM.class.getName());
     private final String id;
     private final Bank bank;
     private final Session session;
@@ -33,6 +35,7 @@ public class ATM {
     }
 
     public void start(){
+        LOGGER.info("ATM has started");
         display.welcomeMessage(bank.getName());
         display.showOptions("Please, insert a number corresponding to a valid option",
                             Arrays.asList("Login", "Administrate", "Exit & Shutdown"));
@@ -46,6 +49,7 @@ public class ATM {
     }
 
     public void shutdown(){
+        LOGGER.info("ATM is shutting down");
         display.shutdownMessage();
     }
 }

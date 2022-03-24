@@ -11,9 +11,11 @@ import lombok.Getter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 @Getter
 public abstract class ReceiptEmitter {
+  private static final Logger LOGGER = Logger.getLogger(ReceiptEmitter.class.getName());
   private final String bankName;
   private final String clientName;
   private final String date;
@@ -44,7 +46,7 @@ public abstract class ReceiptEmitter {
       document.open();
       buildReceipt(document);
       document.close();
-      System.out.println("Receipt emitted");
+      LOGGER.info("Receipt emitted and saved in PDF format");
     } catch (DocumentException | FileNotFoundException e) {
       e.printStackTrace();
     }

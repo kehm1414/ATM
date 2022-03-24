@@ -8,10 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 @Getter
 @Setter
 public class Session {
+  private static final Logger LOGGER = Logger.getLogger(Session.class.getName());
   private Account activeAccount;
   private ATM atm;
   private boolean isConnected;
@@ -32,12 +34,12 @@ public class Session {
     login(accountNumber, pinNumber);
   }
 
-  public void login(String accountNumber, String pin) {
+  private void login(String accountNumber, String pin) {
     Account account = atm.getBank().searchAccount(accountNumber);
-    if(account != null) {
+    if(account != null && account.getPin().equals(pin)) {
       this.activeAccount = account;
       this.isConnected = true;
-
+      LOGGER.info("Session started by: " + account.getOwnerName());
       atm.getDisplay().welcomeUser(this.activeAccount.getOwnerName());
       process(this.activeAccount.getATMTransactionsAvailable(atm));
     } else {
@@ -54,9 +56,10 @@ public class Session {
     adminLogin(pinNumber);
   }
 
-  public void adminLogin(String pinNumber) {
+  private void adminLogin(String pinNumber) {
     if (pinNumber.equals(atm.getAdminPin())) {
       this.isConnected = true;
+      LOGGER.info("Session started by Admin");
       process(new AdminTransactionsCollection(atm));
     } else {
       atm.getDisplay().loginBadCredentials();
@@ -64,7 +67,7 @@ public class Session {
     }
   }
 
-  public void process(ITransactionsCollection transactionsSpecificToAccount) {
+  private void process(ITransactionsCollection transactionsSpecificToAccount) {
     transactionsSpecificToAccount.chooseTransaction().process();
     if (isConnected) {
       if(userWantsAnotherTransaction()){
@@ -88,6 +91,7 @@ public class Session {
     atm.getDisplay().loggedOutMessage();
     this.activeAccount = null;
     this.isConnected = false;
+    LOGGER.info("Session finished");
     atm.start();
   }
 }

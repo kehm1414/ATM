@@ -2,7 +2,10 @@ package atm.transactions;
 
 import atm.ATM;
 
+import java.util.logging.Logger;
+
 public class ChangeAdminPinTransaction implements ITransaction {
+  private static final Logger LOGGER = Logger.getLogger(ChangeAdminPinTransaction.class.getName());
 
   private ATM atm;
 
@@ -28,6 +31,7 @@ public class ChangeAdminPinTransaction implements ITransaction {
 
   public void process(String newPin) {
     atm.setAdminPin(newPin);
+    LOGGER.info("Admin Pin has been changed.");
   }
 
   public boolean checkIfUserRemembersOldPin(int tries){
