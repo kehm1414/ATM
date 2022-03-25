@@ -14,18 +14,10 @@ public class Main {
     Bank bank = new Bank("Mercantil");
     bank.addAccount(
         new Account(
-            "Kevin Hernandez",
-            "01234567890123456789",
-            "1234",
-                "kvkevinhz@gmail.com",
-            20000));
+            "Kevin Hernandez", "01234567890123456789", "1234", "kvkevinhz@gmail.com", 20000));
     bank.addAccount(
         new OnlyCashAccount(
-            "Jose Perez",
-            "00110011001100110011",
-            "0011",
-                "joseperez@gmail.com",
-            10000));
+            "Jose Perez", "00110011001100110011", "0011", "joseperez@gmail.com", 10000));
 
     // Inicializamos nuestro cajero
     Display display = new Display();

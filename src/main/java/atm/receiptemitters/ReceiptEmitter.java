@@ -25,11 +25,11 @@ public abstract class ReceiptEmitter {
   private final String reference;
 
   protected ReceiptEmitter(
-          String bankName,
-          String clientName,
-          String transactionName,
-          String accountNumber,
-          String amount) {
+      String bankName,
+      String clientName,
+      String transactionName,
+      String accountNumber,
+      String amount) {
     this.bankName = bankName;
     this.clientName = clientName;
     this.date = LocalDate.now().toString();
@@ -53,24 +53,24 @@ public abstract class ReceiptEmitter {
   }
 
   private void buildReceipt(Document document) throws DocumentException {
-      // Header
-      document.add(getHeaderSection());
-      document.add(new Paragraph("  "));
-      document.add(new LineSeparator());
+    // Header
+    document.add(getHeaderSection());
+    document.add(new Paragraph("  "));
+    document.add(new LineSeparator());
 
-      // General Data
-      document.add(getGeneralDataSection());
-      document.add(new Paragraph("  "));
-      document.add(new LineSeparator());
+    // General Data
+    document.add(getGeneralDataSection());
+    document.add(new Paragraph("  "));
+    document.add(new LineSeparator());
 
-      // Transaction Results
-      document.add(getResultsTitleSection());
-      document.add(getSuccessMessageSection());
-      document.add(getTransactionDetails()); //Abstract
-      document.add(getFarewellMessageSection());
+    // Transaction Results
+    document.add(getResultsTitleSection());
+    document.add(getSuccessMessageSection());
+    document.add(getTransactionDetails()); // Abstract
+    document.add(getFarewellMessageSection());
   }
 
-  private Paragraph getHeaderSection(){
+  private Paragraph getHeaderSection() {
     Font myHeaderFont = new Font();
     myHeaderFont.setSize(20F);
     myHeaderFont.setStyle("bold");
@@ -79,22 +79,15 @@ public abstract class ReceiptEmitter {
     return header;
   }
 
-  private Paragraph getGeneralDataSection(){
+  private Paragraph getGeneralDataSection() {
     Font generalDataFont = new Font();
     generalDataFont.setSize(15F);
     return new Paragraph(
-                    "Name: "
-                            + clientName
-                            + "\n"
-                            + "Date: "
-                            + date
-                            + "\n"
-                            + "Transaction: "
-                            + transactionName,
-                    generalDataFont);
+        "Name: " + clientName + "\n" + "Date: " + date + "\n" + "Transaction: " + transactionName,
+        generalDataFont);
   }
 
-  private Paragraph getResultsTitleSection(){
+  private Paragraph getResultsTitleSection() {
     Font resultsTitleFont = new Font();
     resultsTitleFont.setSize(18F);
     Paragraph resultsTitle = new Paragraph("Transaction Results", resultsTitleFont);
@@ -103,23 +96,22 @@ public abstract class ReceiptEmitter {
     return resultsTitle;
   }
 
-  private Paragraph getSuccessMessageSection(){
+  private Paragraph getSuccessMessageSection() {
     Font successMessageFont = new Font();
     successMessageFont.setSize(12F);
     Paragraph successMessage =
-            new Paragraph("Your operation has been successfully completed.", successMessageFont);
+        new Paragraph("Your operation has been successfully completed.", successMessageFont);
     successMessage.setAlignment(1);
     successMessage.setSpacingAfter(15);
     return successMessage;
   }
 
-  private Paragraph getFarewellMessageSection(){
+  private Paragraph getFarewellMessageSection() {
     Font farewellMessageFont = new Font();
     farewellMessageFont.setStyle(3);
     farewellMessageFont.setSize(12);
     Paragraph farewellMessage =
-            new Paragraph(
-                    "¡Thank you for preferring us! Hope to see you again.", farewellMessageFont);
+        new Paragraph("¡Thank you for preferring us! Hope to see you again.", farewellMessageFont);
     farewellMessage.setAlignment(1);
     return farewellMessage;
   }

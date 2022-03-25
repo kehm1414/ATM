@@ -83,12 +83,12 @@ public class Display {
     System.out.println("You can't transfer to the same account you're transferring from");
   }
 
-  public void pinDoesntMatch(int tries){
+  public void pinDoesntMatch(int tries) {
     System.out.println("The pin number you've introduced does not match your actual pin.");
     System.out.println("You have " + tries + " tries left.");
   }
 
-  public void pinForgottenLogout(){
+  public void pinForgottenLogout() {
     System.out.println("It seems you've forgotten your pin.");
     System.out.println("For security reasons you will be logged out.");
   }

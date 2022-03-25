@@ -2,10 +2,7 @@ package atm.transactions;
 
 import atm.ATM;
 
-import java.util.logging.Logger;
-
 public class ChangeAdminPinTransaction implements ITransaction {
-  private static final Logger LOGGER = Logger.getLogger(ChangeAdminPinTransaction.class.getName());
 
   private ATM atm;
 
@@ -16,7 +13,7 @@ public class ChangeAdminPinTransaction implements ITransaction {
   @Override
   public boolean process() {
 
-    if(!checkIfUserRemembersOldPin(3)){
+    if (!checkIfUserRemembersOldPin(3)) {
       atm.getDisplay().pinForgottenLogout();
       atm.getSession().logout();
       return false;
@@ -31,10 +28,9 @@ public class ChangeAdminPinTransaction implements ITransaction {
 
   public void process(String newPin) {
     atm.setAdminPin(newPin);
-    LOGGER.info("Admin Pin has been changed.");
   }
 
-  public boolean checkIfUserRemembersOldPin(int tries){
+  public boolean checkIfUserRemembersOldPin(int tries) {
     while (tries > 0) {
       atm.getDisplay().askPreviousPin();
       String oldPin = atm.getKeyboard().getPin();
@@ -42,7 +38,6 @@ public class ChangeAdminPinTransaction implements ITransaction {
       tries--;
       atm.getDisplay().pinDoesntMatch(tries);
     }
-    return tries>0;
+    return tries > 0;
   }
-
 }

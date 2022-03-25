@@ -36,7 +36,7 @@ public class Session {
 
   private void login(String accountNumber, String pin) {
     Account account = atm.getBank().searchAccount(accountNumber);
-    if(account != null && account.getPin().equals(pin)) {
+    if (account != null && account.getPin().equals(pin)) {
       this.activeAccount = account;
       this.isConnected = true;
       LOGGER.info("Session started by: " + account.getOwnerName());
@@ -70,7 +70,7 @@ public class Session {
   private void process(ITransactionsCollection transactionsSpecificToAccount) {
     transactionsSpecificToAccount.chooseTransaction().process();
     if (isConnected) {
-      if(userWantsAnotherTransaction()){
+      if (userWantsAnotherTransaction()) {
         process(transactionsSpecificToAccount);
       } else {
         logout();
@@ -80,9 +80,9 @@ public class Session {
 
   private boolean userWantsAnotherTransaction() {
     atm.getDisplay()
-            .showOptions(
-                    "¿Would you like to try another transaction? (If \"No\" you will be logged out)",
-                    Arrays.asList("Yes", "No"));
+        .showOptions(
+            "¿Would you like to try another transaction? (If \"No\" you will be logged out)",
+            Arrays.asList("Yes", "No"));
     int choice = atm.getKeyboard().getChoice(2);
     return choice == 1;
   }

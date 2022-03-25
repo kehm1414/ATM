@@ -1,5 +1,5 @@
 package atm.atmcomponents; // El dispensador de dinero, acá se maneja el stock de dinero dentro del
-                           // cajero.
+// cajero.
 
 import lombok.Getter;
 import lombok.Setter;

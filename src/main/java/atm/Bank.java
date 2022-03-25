@@ -20,7 +20,7 @@ public class Bank {
     accounts.add(account);
   }
 
-  public Account searchAccount(String accountNumber){
+  public Account searchAccount(String accountNumber) {
     for (Account account : getAccounts()) {
       if (account.getAccountNumber().equals(accountNumber)) return account;
     }

@@ -46,7 +46,7 @@ public class TransferFundsTransaction implements ITransaction {
     toAccount.setBalance(toAccount.getBalance() + amount);
   }
 
-  public boolean isValidDestinationAccount(Account account, String originAccountNumber){
+  public boolean isValidDestinationAccount(Account account, String originAccountNumber) {
     if (account == null) {
       atm.getDisplay().accountNotFound();
       return false;

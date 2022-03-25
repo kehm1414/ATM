@@ -40,7 +40,7 @@ public class ChangePinTransaction implements ITransaction {
     account.setPin(newPin);
   }
 
-  public boolean checkIfUserRemembersOldPin(int tries, String pin){
+  public boolean checkIfUserRemembersOldPin(int tries, String pin) {
     while (tries > 0) {
       atm.getDisplay().askPreviousPin();
       String oldPin = atm.getKeyboard().getPin();
@@ -48,7 +48,7 @@ public class ChangePinTransaction implements ITransaction {
       tries--;
       atm.getDisplay().pinDoesntMatch(tries);
     }
-    return tries>0;
+    return tries > 0;
   }
 
   public ReceiptEmitter emitReceipt(Account account, String newPin) {

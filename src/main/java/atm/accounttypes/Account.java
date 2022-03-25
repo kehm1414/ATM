@@ -14,12 +14,7 @@ public class Account implements IATMTransactional {
   private String email;
   @Setter private double balance;
 
-  public Account(
-          String ownerName,
-          String accountNumber,
-          String pin,
-          String email,
-          double balance) {
+  public Account(String ownerName, String accountNumber, String pin, String email, double balance) {
     this.ownerName = ownerName;
     this.accountNumber = accountNumber;
     this.pin = pin;
